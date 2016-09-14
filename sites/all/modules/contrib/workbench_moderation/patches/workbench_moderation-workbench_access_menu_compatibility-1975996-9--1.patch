@@ -1,0 +1,22 @@
+diff --git a/workbench_moderation.module b/workbench_moderation.module
+index 6e98d12..04d20fa 100644
+--- a/workbench_moderation.module
++++ b/workbench_moderation.module
+@@ -1809,6 +1809,17 @@ function workbench_moderation_store($node) {
+     }
+   }
+ 
++  // Workbench Access, using Menu as an active access scheme, requires the node's menu property.
++  if (module_exists('menu')) {
++    menu_node_prepare($live_revision);
++
++    // Menu expects FAPI to set the enabled flag.
++    // See https://api.drupal.org/api/drupal/modules%21node%21node.module/function/node_object_prepare/7#comment-28644.
++    if (!empty($live_revision->menu)) {
++      $live_revision->menu['enabled'] = (int) (bool) $live_revision->menu['mlid'];
++    }
++  }
++
+   // Save the node.
+   $live_revision->revision = 0;
+   $live_revision->path['pathauto'] = 0;

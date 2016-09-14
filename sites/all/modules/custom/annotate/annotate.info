@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Lets users add private annotations to nodes.
+ *
+ * Adds a text field when a node is displayed
+ * so that authenticated users may make notes.
+ */
+
+name = Annotate
+description = "Allows users to annotate nodes."
+package = Pro Drupal Development
+core = 7.x
+files[] = annotate.module
+files[] = annotate.install
+files[] = annotate.admin.inc
+configure=admin/config/content/annotate/settings
